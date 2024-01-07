@@ -17,7 +17,7 @@ export class FlightService {
     if (!this.cache[url]) {
       this.cache[url] = this.http.get<Flight[]>(url)
         .pipe(
-          shareReplay(1),
+          shareReplay(1), //limit to call the api
           catchError(this.handleError)
         );
     }
