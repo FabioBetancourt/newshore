@@ -1,0 +1,10 @@
+
+<div *ngIf="flights.length; else noFlights">
+  <ul>
+    <li *ngFor="let flight of flights">
+      {{ flight.departureStation }} - {{ flight.arrivalStation }}
+      ({{ flight.flightNumber }}): {{ flight.price }}
+    </li>
+  </ul>
+</div>
+<ng-template #noFlights>No flights available.</ng-template>
