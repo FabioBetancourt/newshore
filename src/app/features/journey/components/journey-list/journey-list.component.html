@@ -1,35 +1,62 @@
-<form (ngSubmit)="findRoute()">
-  <div>
-    <label for="origin">Origin:</label>
-    <input type="text" id="origin" [(ngModel)]="origin" name="origin" required minlength="3" maxlength="3" pattern="[A-Z]{3}" (input)="origin = origin.toUpperCase()">
-  </div>
-  <div>
-    <label for="destination">Destination:</label>
-    <input type="text" id="destination" [(ngModel)]="destination" name="destination" required minlength="3" maxlength="3" pattern="[A-Z]{3}" (input)="destination = destination.toUpperCase()">
-  </div>
-  <div>
-    <label for="currency">Formato de Moneda:</label>
-    <select id="currency" [(ngModel)]="selectedCurrency" name="currency">
-      <option value="USD">USD</option>
-      <option value="EUR">EUR</option>
-      <option value="GBP">GBP</option>
-      <option value="COP">COP</option>
-      <!-- Agrega más opciones de moneda según sea necesario -->
-    </select>
-  </div>
-  <button type="submit" [disabled]="origin === destination || !origin || !destination">Find Route</button>
-</form>
+<div class="background-image">
+  <div class="container">
+    <!-- Card de solicitud de vuelo -->
+    <div class="card">
+      <h2>¡Compra ya tu tickete!</h2>
+      <form (ngSubmit)="findRoute()">
+        <div>
+          <label for="origin">Salida:</label>
+          <input type="text" id="origin" [(ngModel)]="origin" name="origin" required minlength="3" maxlength="3"
+            pattern="[A-Z]{3}" (input)="origin = origin.toUpperCase()">
+        </div>
+        <div>
+          <label for="destination">Destino:</label>
+          <input type="text" id="destination" [(ngModel)]="destination" name="destination" required minlength="3"
+            maxlength="3" pattern="[A-Z]{3}" (input)="destination = destination.toUpperCase()">
+        </div>
+        <div>
+          <label for="currency">Formato de Moneda:</label>
+          <select id="currency" [(ngModel)]="selectedCurrency" name="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="COP">COP</option>
+            <!-- Agrega más opciones de moneda según sea necesario -->
+          </select>
+        </div>
+        <div>
+          <label for="maxFlights">Número Máximo de Vuelos:</label>
+          <input type="number" id="maxFlights" [(ngModel)]="numberOfFlights" name="numberOfFlights" min="1" required>
+        </div>
 
-<div *ngIf="journey">
-  <h2>Detalles del Viaje:</h2>
-  <ul>
-    <li *ngFor="let flight of journey">
-      <div>Salida: {{ flight.departureStation }}</div>
-      <div>Llegada: {{ flight.arrivalStation }}</div>
-      <div>Precio en {{ selectedCurrency }}: {{ convertPrice(flight.price, selectedCurrency) }}</div>
-      <span>Transporte: </span>
-      <div>Número de vuelo: {{ flight.flightNumber }}</div>
-      <div>Abordaje: {{ flight.flightCarrier }}</div>
-    </li>
-  </ul>
+        <button type="submit" [disabled]="origin === destination || !origin || !destination">Encontrar Vuelo</button>
+
+        <div *ngIf="message" class="user-message">
+          {{ message }}
+        </div>
+
+      </form>
+    </div>
+
+    <div *ngIf="journey && journey.length > 0" class="card">
+      <h2>Información de Ruta</h2>
+      <div *ngIf="journey.length > 1">
+        <p>Ruta desde {{ origin }} hasta {{ destination }}</p>
+        <p>Precio Total en {{ selectedCurrency }}: {{ convertPrice(totalPrice, selectedCurrency) }}</p>
+        <h3>Vuelos:</h3>
+      </div>
+      <ul>
+        <li *ngFor="let flight of journey">
+          <div>Salida: {{ flight.departureStation }}</div>
+          <div>Llegada: {{ flight.arrivalStation }}</div>
+          <div>Precio en {{ selectedCurrency }}: {{ convertPrice(flight.price,
+            selectedCurrency) }}</div>
+          <span>Transporte: </span>
+          <div>Número de vuelo: {{ flight.flightNumber }}</div>
+          <div>Abordaje: {{ flight.flightCarrier }}</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
 </div>

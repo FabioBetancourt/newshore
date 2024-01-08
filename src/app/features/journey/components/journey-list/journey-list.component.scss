@@ -1,0 +1,133 @@
+/* Establecer una imagen de fondo */
+.background-image {
+  background-image: url('../../../../../assets/avion.jpeg'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la URL de tu imagen de fondo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh; /* Asegura que la imagen de fondo cubra la altura completa de la pantalla */
+}
+
+/* Centrar contenido en el medio de la pantalla */
+.container {
+  display: block; /* Default block display stacks children vertically */
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Estilo de las cards */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px auto; /* Center the card and add margin on top and bottom */
+  text-align: center;
+  max-width: 400px; /* Maximum width of the card */
+  width: 100%; /* Make card expand to container width */
+}
+
+
+input[type="text"],[type="number"], select {
+  width: 100%; /* Full width */
+  padding: 12px; /* Padding inside the inputs */
+  margin: 8px 0; /* Margin for top and bottom */
+  display: inline-block;
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 20px; /* Rounded borders */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+  width: 100%; /* Full width */
+  background-color: #90ee90; /* Light green background */
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 20px; /* Rounded borders */
+  cursor: pointer;
+  font-size: 18px; /* Larger font size */
+}
+
+button[type="submit"]:not(:disabled) {
+  width: 100%; /* Full width */
+  background-color: #32CD32; /* Vivid green background */
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 20px; /* Rounded borders */
+  cursor: pointer;
+  font-size: 18px; /* Larger font size */
+}
+
+button[type="submit"]:not(:disabled):hover {
+  background-color: #228B22; /* Darker green on hover */
+}
+
+/* Style for the disabled submit button */
+button[type="submit"]:disabled {
+  background-color: #90ee90; /* Light green background */
+  color: #ccc; /* Dimmed text color */
+  cursor: not-allowed; /* Cursor to indicate disabled state */
+}
+
+/* Style for the list */
+ul {
+  list-style-type: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  background: #f9f9f9; /* Light background for list items */
+  margin-bottom: 10px; /* Space between list items */
+  padding: 15px; /* Padding inside list items */
+  text-align: left; /* Align text to the left */
+  border-radius: 8px; /* Rounded corners for list items */
+}
+
+ul li div {
+  margin-bottom: 5px; /* Space between divs inside list items */
+}
+
+.user-message {
+  color: red; /* Change color as you wish */
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid red; /* Change or remove border as you wish */
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .card {
+    max-width: none; /* Allows the card to expand to the full width of the screen */
+    margin: 10px; /* Adjust margin for smaller screens */
+  }
+
+
+  .card, button[type="submit"], input[type="text"], select, ul li div {
+    font-size: 16px; /* Slightly smaller font size for mobile */
+  }
+
+  input[type="text"], select, button[type="submit"] {
+    padding: 15px; /* Larger padding for touch targets */
+  }
+
+  /* Ensure the button is still visually distinct when enabled */
+  button[type="submit"]:not(:disabled) {
+    background-color: #32CD32; /* Vivid green background */
+  }
+
+  button[type="submit"]:not(:disabled):hover {
+    background-color: #228B22; /* Darker green on hover */
+  }
+
+  button[type="submit"]:disabled {
+    background-color: #90ee90; /* Light green background */
+  }
+}
+

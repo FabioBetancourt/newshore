@@ -19,6 +19,10 @@ export class JourneyListComponent {
     GBP: 0.73,
     COP: 4000,
   };
+  numberOfFlights: number = 1;
+  message: string = '';
+  totalPrice: number = 0;
+
 
   constructor(private flightService: FlightService) { }
 
@@ -34,35 +38,52 @@ export class JourneyListComponent {
   }
 
   findRoute(): void {
-    this.flightService.getFlights(2).subscribe(
-      allFlights => {
-        this.journey = this.constructJourney(allFlights, this.origin, this.destination);
+    this.message = '';
+
+    this.flightService.getFlights(this.numberOfFlights).subscribe({
+      next: allFlights => {
+        this.journey = this.constructJourney(allFlights, this.origin, this.destination, this.numberOfFlights);
         if (!this.journey || this.journey.length === 0) {
-          console.error('No se pudo construir una ruta con los datos proporcionados.');
+          this.message = 'No se pudo construir una ruta con los datos proporcionados, intente con un numero mayor de vuelos';
+        } else if (this.journey.length === 1 && this.numberOfFlights > 1) {
+          this.message = 'Ruta directa encontrada, no se necesitan vuelos adicionales.';
         }
       },
-      error => {
-        console.error('Error al buscar vuelos', error);
+      error: error => {
+        this.message = 'Error al buscar vuelos: ' + error.message;
+      },
+      complete: () => {
+        // Code here will run when the observable completes (i.e., emits all its values)
       }
-    );
+    });
   }
-  private constructJourney(flights: Flight[], origin: string, destination: string): Flight[] | null {
-    let currentOrigin = origin;
-    let route: Flight[] = [];
 
-    while (currentOrigin !== destination) {
-      let flight = flights.find(f => f.departureStation === currentOrigin);
-      if (!flight) {
-        return null;
-      }
+private constructJourney(flights: Flight[], origin: string, destination: string, numberOfFlights: number): Flight[] | null {
+  if (numberOfFlights === 1) {
+    const directFlight = flights.find(f => f.departureStation === origin && f.arrivalStation === destination);
+    return directFlight ? [directFlight] : null;
+  }
 
-      route.push(flight);
-      currentOrigin = flight.arrivalStation;
+  let currentOrigin = origin;
+  let route: Flight[] = [];
 
+  while (currentOrigin !== destination) {
+    let flight = flights.find(f => f.departureStation === currentOrigin);
+    if (!flight) {
+      return null;
     }
 
-    return route;
+    route.push(flight);
+    currentOrigin = flight.arrivalStation;
+
+    if (route.length >= numberOfFlights) {
+      break; // Stop if the route has reached the specified number of flights
+    }
   }
+  this.totalPrice = route.reduce((sum, flight) => sum + flight.price, 0);
+
+  return route.length && route[route.length - 1].arrivalStation === destination ? route : null;
+}
 
   //is better call the api but for the time that i have no is possible
   convertPrice(price: number, targetCurrency: string): string {
