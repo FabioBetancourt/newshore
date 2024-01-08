@@ -51,9 +51,6 @@ export class JourneyListComponent {
       },
       error: error => {
         this.message = 'Error al buscar vuelos: ' + error.message;
-      },
-      complete: () => {
-        // Code here will run when the observable completes (i.e., emits all its values)
       }
     });
   }
