@@ -8,7 +8,7 @@ En este proyecto, se emplea el framework Angular para el consumo de APIs, siguie
 - Consumo REST API
 - Control de versiones
 - Manejo de estilos en cascada CSS
-- Control de excepciones 
+- Control de excepciones
 - Test unitarios
 - Uso de interceptors
 
@@ -27,6 +27,7 @@ Ejecute `ng build` para construir el proyecto. Los artefactos de compilación se
 ## Ejecución de pruebas unitarias
 
 Ejecute `ng test` para ejecutar las pruebas unitarias
+
 
 ## Cosas a mejorar
 
