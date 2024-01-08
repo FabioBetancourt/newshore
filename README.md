@@ -1,3 +1,6 @@
+## Resumen
+En este proyecto, se emplea el framework Angular para el consumo de APIs, siguiendo patrones de arquitectura estandarizados por Angular. Se utiliza programación orientada a objetos mediante el uso de interfaces, se implementa un riguroso control de versiones y se aplica CSS puro para dar estilo a la página. Además, se presta atención al manejo de excepciones, se implementan interceptors para la gestión de peticiones y se realizan pruebas unitarias exhaustivas para garantizar la calidad del código.
+
 ## Que encontrar en este proyecto
 
 - Arquitectura de la solución
