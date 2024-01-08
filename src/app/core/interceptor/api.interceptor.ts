@@ -12,7 +12,6 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercepted request', req);
 
     const clonedRequest = req.clone({
       headers: req.headers.set('Your-Header-Name', 'Your-Header-Value')
@@ -21,7 +20,7 @@ export class ApiInterceptor implements HttpInterceptor {
     return next.handle(clonedRequest).pipe(
       tap(evt => {
         if (evt instanceof HttpResponse) {
-          console.log('Intercepting response', evt);
+          console.log('Intercepting response');
         }
       }),
       catchError((error: HttpErrorResponse) => {
@@ -30,7 +29,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
           console.error('An error 500 occurred', error.message);
         }
-
         return throwError(() => new Error(error.statusText));
       })
     );

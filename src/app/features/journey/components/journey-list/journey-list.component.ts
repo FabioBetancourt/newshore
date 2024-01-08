@@ -12,6 +12,13 @@ export class JourneyListComponent {
   origin: string = '';
   destination: string = '';
   journey: any;
+  selectedCurrency: string = 'USD';
+  exchangeRates: { [key: string]: number } = {
+    USD: 1,
+    EUR: 0.85,
+    GBP: 0.73,
+    COP: 4000,
+  };
 
   constructor(private flightService: FlightService) { }
 
@@ -48,12 +55,28 @@ export class JourneyListComponent {
       if (!flight) {
         return null;
       }
+
       route.push(flight);
       currentOrigin = flight.arrivalStation;
+
     }
 
     return route;
   }
+
+  //is better call the api but for the time that i have no is possible
+  convertPrice(price: number, targetCurrency: string): string {
+    if (targetCurrency !== 'USD') {
+      const conversionRate = this.exchangeRates[targetCurrency];
+      price = price * conversionRate;
+    }
+    if (targetCurrency === 'COP') {
+      return price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    } else {
+      return price.toFixed(2);
+    }
+  }
 }
+
 
 
