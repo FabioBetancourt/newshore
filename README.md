@@ -1,13 +1,13 @@
 ## Que encontrar en este proyecto
 
-• Arquitectura de la solución
-• Programación orientada a objetos
-• Consumo REST API
-• Control de versiones
-• Manejo de estilos en cascada CSS
-• Control de excepciones 
-• Test unitarios
-• Uso de interceptors
+- Arquitectura de la solución
+- Programación orientada a objetos
+- Consumo REST API
+- Control de versiones
+- Manejo de estilos en cascada CSS
+- Control de excepciones 
+- Test unitarios
+- Uso de interceptors
 
 ## NewShore
 
